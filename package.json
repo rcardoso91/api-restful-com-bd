@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "postinstall": "knex migrate:latest",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "migrate-latest": "npx knex migrate:latest",
+    "seed-run": "npx knex seed:run",
     "start": "node server.js"
   },
   "keywords": [],

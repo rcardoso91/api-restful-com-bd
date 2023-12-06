@@ -10,7 +10,6 @@ const knex = require('knex')({
 
 const endpoint = '/produtos';
 
-// Middleware de tratamento de erros
 apiRouter.use(async (req, res, next) => {
   try {
     await next();
@@ -19,13 +18,11 @@ apiRouter.use(async (req, res, next) => {
   }
 });
 
-// Obter todos os produtos
 apiRouter.get(endpoint, async (req, res) => {
   const produtos = await knex.select('*').from('produto');
   res.status(200).json(produtos);
 });
 
-// Obter um produto por ID
 apiRouter.get(`${endpoint}/:id`, async (req, res) => {
   const { id } = req.params;
   const produto = await knex.select('*').from('produto').where('id', id);
@@ -37,11 +34,9 @@ apiRouter.get(`${endpoint}/:id`, async (req, res) => {
   }
 });
 
-// Criar um novo produto
 apiRouter.post(endpoint, async (req, res) => {
   const { descricao, valor, marca } = req.body;
 
-  // Validação de entrada
   if (!descricao || !valor) {
     return res.status(400).json({ message: 'Descrição e valor são obrigatórios' });
   }
@@ -50,12 +45,10 @@ apiRouter.post(endpoint, async (req, res) => {
   res.status(201).json(produto);
 });
 
-// Atualizar um produto por ID
 apiRouter.put(`${endpoint}/:id`, async (req, res) => {
   const { id } = req.params;
   const { descricao, valor, marca } = req.body;
 
-  // Validação de entrada
   if (!descricao || !valor) {
     return res.status(400).json({ message: 'Descrição e valor são obrigatórios' });
   }
