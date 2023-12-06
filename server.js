@@ -9,7 +9,7 @@ app.use(cors())
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/app', express.static (path.join (__dirname, '/public')))
-app.use('/api/v1', apiV1Router);//produtos
+app.use('/api', apiV1Router);//produtos
 
 
 let port = process.env.PORT || 3000
